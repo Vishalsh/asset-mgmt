@@ -16,6 +16,7 @@ group :test, :development do
   gem 'factory_girl_rails'
   gem 'pry'
   gem 'simplecov', require: false
+  gem 'database_cleaner'
 end
 
 # Use ActiveModel has_secure_password

@@ -1,12 +1,16 @@
 App.Routers.Asset_type = Backbone.Router.extend({
 
     routes: {
-        '': 'index'
+        'asset_types': 'index',
+        'asset_types/new': 'new'
     },
     index: function () {
-        console.log("Home page loaded");
         asset_type_view.render();
+    },
+    new: function() {
+
     }
+
 
 });
 

@@ -1,0 +1,81 @@
+@import "mixins/colors";
+
+body {
+  font-family: opensans-regular;
+  background: whitesmoke;
+  color: $text-color;
+}
+
+a {
+  color: $text-color;
+  text-decoration: none;
+
+  &:hover {
+    color: $text-color;
+    text-decoration: none;
+  }
+}
+
+.row {
+  margin: 0;
+}
+
+#header {
+  font-family: opensans-semibold;
+  padding: 10px 0;
+  box-shadow: 0 3px 10px $shadow-color;
+  margin-bottom: 20px;
+  background: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2000;
+
+  #heading {
+    a {
+      font-size: 26px;
+    }
+    #user_type {
+      color: $user-type-color;
+      font-size: 16px;
+    }
+  }
+
+  #user {
+    padding-top: 9px;
+  }
+}
+
+#sidebar {
+  padding: 0;
+  box-shadow: 0 3px 10px $shadow-color;
+  background: white;
+  position: fixed;
+  top: 78px;
+  width: 150px;
+  z-index: 9;
+  left: 0;
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+  li {
+    margin: 0 5px;
+    padding: 6px 0;
+    vertical-align: middle;
+    text-align: center;
+    border-top: 1px solid $text-color;
+    list-style: none;
+    &:first-child {
+      border-top: none;
+    }
+
+  }
+}
+
+.page {
+  margin-top: 80px;
+  margin-left: 170px;
+  margin-right: 20px;
+}

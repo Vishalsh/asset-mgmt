@@ -2,13 +2,32 @@
 <html>
 <head>
   <title>AssetMgmt</title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-  <%= csrf_meta_tags %>
+
 </head>
 <body>
 
+<div class="page"></div>
 <%= yield %>
+
+<script type="text/template" id="asset_type_list">
+
+  <table class='table table-striped'>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Properties</th>
+        </tr>
+    </thead>
+    <tbody>
+           </tbody>
+  </table>
+
+
+</script>
+
+<%= stylesheet_link_tag "application", media: "all" %>
+<%= javascript_include_tag "application" %>
+<%= csrf_meta_tags %>
 
 </body>
 </html>

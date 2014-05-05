@@ -15,4 +15,3 @@ App.Routers.Asset_type = Backbone.Router.extend({
 });
 
 new App.Routers.Asset_type;
-Backbone.history.start();

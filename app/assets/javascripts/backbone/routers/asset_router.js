@@ -10,4 +10,3 @@ App.Routers.Asset = Backbone.Router.extend({
 });
 
 new App.Routers.Asset;
-Backbone.history.start();

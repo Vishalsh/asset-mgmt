@@ -20,3 +20,10 @@
 //= require backbone_datalink
 //= require backbone/asset_mgmt
 //= require_tree .
+
+_.templateSettings = {
+    interpolate: /\<\@\=(.+?)\@\>/gim,
+    evaluate: /\<\@(.+?)\@\>/gim,
+    escape: /\<\@\-(.+?)\@\>/gim
+};
+

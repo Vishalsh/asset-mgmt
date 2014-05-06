@@ -1,0 +1,37 @@
+doctype html
+html
+  head
+    title AssetMgmt
+  body
+    #header.row
+      .col-lg-4
+        #heading
+          strong
+            a href="#"  TW Inventory
+            span#user_type Admin
+      .col-lg-offset-4.col-lg-4
+        #user.pull-right
+          span vishalsh
+    #sidebar
+      ul
+        li
+          a href="#admins"  Admins
+        li
+          a href="#assets"  Assets
+        li
+          a href="#asset_types"  Asset types
+        li
+          a href="#"  Assignments
+        li
+          a href="#"  Companies
+        li
+          a href="#"  Models
+        li
+          a href="#"  Offices
+    .page-navigations
+    .page-content
+    = stylesheet_link_tag "application", media: "all"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+    = render 'asset_types/list'
+    = render 'asset_types/new'

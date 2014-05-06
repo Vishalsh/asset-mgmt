@@ -12,7 +12,7 @@ gem 'bson_ext'
 gem "rails-backbone"
 gem 'underscore-rails'
 gem 'requirejs-rails', '~> 0.9.2'
-
+gem 'slim-rails'
 group :test, :development do
   gem "rspec-rails", "~> 2.14.0"
   gem 'factory_girl_rails'

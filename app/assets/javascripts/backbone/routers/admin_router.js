@@ -9,4 +9,3 @@ App.Routers.Admin = Backbone.Router.extend({
 });
 
 new App.Routers.Admin;
-Backbone.history.start();

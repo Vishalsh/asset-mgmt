@@ -10,3 +10,7 @@ window.App =
   Collections: {}
   Routers: {}
   Views: {}
+
+$(document).ready ->
+  Backbone.history.start()
+  return

@@ -26,5 +26,3 @@ App.Views.Asset_type_new = Backbone.View.extend({
 });
 
 
-var asset_type_list_view = new App.Views.Asset_type_list;
-var asset_type_new_view = new App.Views.Asset_type_new;

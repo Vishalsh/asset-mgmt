@@ -7,4 +7,4 @@ App.Views.Admin = Backbone.View.extend({
     }
 });
 
-var admin_view = new App.Views.Admin;
+

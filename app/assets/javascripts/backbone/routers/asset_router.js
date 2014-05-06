@@ -5,8 +5,7 @@ App.Routers.Asset = Backbone.Router.extend({
     },
 
     index: function () {
+        var asset_view = new App.Views.Asset;
         asset_view.render();
     }
 });
-
-new App.Routers.Asset;

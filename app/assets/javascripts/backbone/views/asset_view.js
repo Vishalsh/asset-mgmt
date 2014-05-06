@@ -7,4 +7,3 @@ App.Views.Asset = Backbone.View.extend({
     }
 });
 
-var asset_view = new App.Views.Asset;

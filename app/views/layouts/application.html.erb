@@ -52,52 +52,13 @@
 <div class="page-navigations"></div>
 <div class="page-content"></div>
 
-<%= yield %>
-
 <%= stylesheet_link_tag "application", media: "all" %>
 <%= javascript_include_tag "application" %>
 <%= csrf_meta_tags %>
 
-<!-- ################### Asset type list #################-->
 
-<script type="text/template" id="asset_type_list">
-
-  <a href="#asset_types" class="btn btn-primary">list</a>
-	<a href="#asset_types/new" class="btn btn-primary">new</a>
-
-  <table class='table table-striped table-bordered'>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Properties</th>
-        </tr>
-    </thead>
-    <tbody>
-
-        <@ _.each(asset_types, function(asset_type) { @>
-            <tr>
-                <td><@= asset_type.get('name') @></td>
-                <td><@= asset_type.get('properties') @></td>
-            </tr>
-        <@ }); @>
-
-           </tbody>
-  </table>
-
-</script>
-
-<!-- ################### Asset type new #################-->
-
-<script type="text/template" id="asset_type_new">
-
-	<a href="#asset_types" class="btn btn-primary">list</a>
-	<a href="#asset_types/new" class="btn btn-primary">new</a>
-
-
-<h1> New Form Here </h2>
-
-</script>
-
+<%= render 'asset_types/list' %>
+<%= render 'asset_types/new' %>
 
 </body>
 </html>

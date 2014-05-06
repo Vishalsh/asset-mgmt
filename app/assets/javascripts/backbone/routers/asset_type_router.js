@@ -5,12 +5,12 @@ App.Routers.Asset_type = Backbone.Router.extend({
         'asset_types/new': 'new'
     },
     index: function () {
-        asset_type_view.render();
+        asset_type_list_view.render();
     },
-    new: function() {
 
+    new: function () {
+        asset_type_new_view.render();
     }
-
 
 });
 

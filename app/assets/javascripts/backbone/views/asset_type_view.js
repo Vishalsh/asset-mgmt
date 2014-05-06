@@ -1,17 +1,30 @@
-App.Views.Asset_type = Backbone.View.extend({
+App.Views.Asset_type_list = Backbone.View.extend({
 
-    el: '.page',
+    el: '.page-content',
 
     render: function () {
         var self = this;
         var asset_types = new App.Collections.Asset_type;
         asset_types.fetch({
             success: function (asset_types) {
-                var template = _.template($('#asset_type_list').html(),{asset_types: asset_types.models});
+                var template = _.template($('#asset_type_list').html(), {asset_types: asset_types.models});
                 self.$el.html(template);
             }
         })
     }
 });
 
-var asset_type_view = new App.Views.Asset_type;
+
+App.Views.Asset_type_new = Backbone.View.extend({
+
+    el: '.page-content',
+
+    render: function () {
+        var template = _.template($("#asset_type_new").html(), {})
+        this.$el.html(template);
+    }
+});
+
+
+var asset_type_list_view = new App.Views.Asset_type_list;
+var asset_type_new_view = new App.Views.Asset_type_new;

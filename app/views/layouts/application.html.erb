@@ -49,18 +49,21 @@
 	</ul>
 </div>
 
-<div class="page">
+<div class="page-navigations"></div>
+<div class="page-content"></div>
 
-</div>
 <%= yield %>
-
-
 
 <%= stylesheet_link_tag "application", media: "all" %>
 <%= javascript_include_tag "application" %>
 <%= csrf_meta_tags %>
 
+<!-- ################### Asset type list #################-->
+
 <script type="text/template" id="asset_type_list">
+
+  <a href="#asset_types" class="btn btn-primary">list</a>
+	<a href="#asset_types/new" class="btn btn-primary">new</a>
 
   <table class='table table-striped table-bordered'>
     <thead>
@@ -80,6 +83,18 @@
 
            </tbody>
   </table>
+
+</script>
+
+<!-- ################### Asset type new #################-->
+
+<script type="text/template" id="asset_type_new">
+
+	<a href="#asset_types" class="btn btn-primary">list</a>
+	<a href="#asset_types/new" class="btn btn-primary">new</a>
+
+
+<h1> New Form Here </h2>
 
 </script>
 

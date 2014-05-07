@@ -4,7 +4,7 @@ class AssetTypesController < ApplicationController
 
     @asset_types = AssetType.all
     respond_to do |format|
-      format.json {      render json: @asset_types }
+      format.json { render json: @asset_types }
       format.html
     end
   end

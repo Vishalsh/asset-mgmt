@@ -16,6 +16,7 @@
 //= require underscore
 //= require underscore
 //= require backbone
+//= require sinon
 //= require backbone_rails_sync
 //= require backbone_datalink
 //= require backbone/asset_mgmt

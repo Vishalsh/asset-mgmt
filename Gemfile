@@ -18,6 +18,7 @@ group :test, :development do
   gem 'factory_girl_rails'
   gem 'pry'
   gem 'jasmine-rails'
+  gem 'sinon-rails'
   gem 'simplecov', require: false
   gem 'database_cleaner'
 end

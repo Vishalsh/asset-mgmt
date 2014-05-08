@@ -10,7 +10,7 @@ App.Views.Asset_type_list = Backbone.View.extend({
                 var template = _.template($('#asset_type_list').html(), {asset_types: asset_types.models, list_assets: 'active', new_asset: ''});
                 self.$el.html(template);
             }
-        })
+        });
     }
 });
 

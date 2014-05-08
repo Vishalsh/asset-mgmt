@@ -60,6 +60,9 @@ describe("asset types collection", function () {
                     JSON.stringify(this.fixture)
                 ]
             );
+            this.asset_types.parse = function (res) {
+                return res.Asset_types.valid.response.asset_types;
+            }
         });
 
         afterEach(function () {
@@ -67,6 +70,7 @@ describe("asset types collection", function () {
         });
 
         it("should make the correct request", function () {
+
             this.asset_types.fetch();
             expect(this.server.requests.length).toEqual(1);
             expect(this.server.requests[0].method).toEqual("GET");

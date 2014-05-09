@@ -28,22 +28,42 @@ App.Views.Asset_type_new = Backbone.View.extend({
         'submit .asset-type-form': 'saveAssetType'
     },
 
+
     saveAssetType: function (e) {
 
         e.preventDefault();
         var name = $("#asset_type_name").val();
         var image_path = $("#asset_type_image_path").val();
         var properties = $("#asset_type_properties").val().split(",");
-
         var assetTypeDetails = {name: name, image_path: image_path, properties: properties};
         var assetType = new App.Models.Asset_type;
         var assetTypeRouter = new App.Routers.Asset_type;
+        var assetTypeNewView = new App.Views.Asset_type_new;
+
+        assetType.on('error', function (model, errors) {
+            assetTypeNewView.showErrors(errors);
+        });
+
         assetType.save(assetTypeDetails, {
+
             success: function () {
-                assetTypeRouter.navigate('asset_types', {trigger: true})
+                assetTypeNewView.navigate(assetTypeRouter);
             }
         });
+    },
+
+    navigate: function (assetTypeRouter) {
+        assetTypeRouter.navigate('asset_types', {trigger: true})
+    },
+
+    showErrors: function (errors) {
+        $(".error").text('');
+        for (var error in errors) {
+            $("#" + error).text(errors[error]);
+        }
     }
+
+
 });
 
 

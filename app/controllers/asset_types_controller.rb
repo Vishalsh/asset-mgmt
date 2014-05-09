@@ -9,7 +9,7 @@ class AssetTypesController < ApplicationController
   end
 
   def create
-    asset_type = AssetType.new(name: params[:name], properties: params[:properties].split(","))
+    asset_type = AssetType.new(name: params[:asset_type][:name], image_path: params[:asset_type][:image_path], properties: params[:asset_type][:properties])
     if asset_type.save
       respond_to do |format|
         format.json { render json: asset_type, status: :created }

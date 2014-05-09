@@ -32,9 +32,10 @@ App.Views.Asset_type_new = Backbone.View.extend({
 
         e.preventDefault();
         var name = $("#asset_type_name").val();
-        var properties = $("#asset_type_properties").val();
+        var image_path = $("#asset_type_image_path").val();
+        var properties = $("#asset_type_properties").val().split(",");
 
-        var assetTypeDetails = {name: name, properties: properties};
+        var assetTypeDetails = {name: name, image_path: image_path, properties: properties};
         var assetType = new App.Models.Asset_type;
         var assetTypeRouter = new App.Routers.Asset_type;
         assetType.save(assetTypeDetails, {

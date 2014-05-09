@@ -22,6 +22,26 @@ App.Views.Asset_type_new = Backbone.View.extend({
     render: function () {
         var template = _.template($("#asset_type_new").html(), { list_assets: '', new_asset: 'active'})
         this.$el.html(template);
+    },
+
+    events: {
+        'submit .asset-type-form': 'saveAssetType'
+    },
+
+    saveAssetType: function (e) {
+
+        e.preventDefault();
+        var name = $("#asset_type_name").val();
+        var properties = $("#asset_type_properties").val();
+
+        var assetTypeDetails = {name: name, properties: properties};
+        var assetType = new App.Models.Asset_type;
+        var assetTypeRouter = new App.Routers.Asset_type;
+        assetType.save(assetTypeDetails, {
+            success: function () {
+                assetTypeRouter.navigate('asset_types', {trigger: true})
+            }
+        });
     }
 });
 

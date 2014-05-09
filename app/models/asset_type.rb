@@ -4,5 +4,5 @@ class AssetType
   field :image_path
   field :properties, type: Array
 
-  validates_presence_of :name, :image_path, :properties
+  validates_presence_of :name, :properties
 end

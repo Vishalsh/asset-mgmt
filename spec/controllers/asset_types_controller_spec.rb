@@ -18,7 +18,7 @@ describe AssetTypesController do
         expect { post :create, asset_type: FactoryGirl.attributes_for(:valid_asset_type), format: :json }.to change(AssetType, :count).by(1)
       end
 
-      it 'renders the created book as json' do
+      it 'renders the created asset_type as json' do
         valid_asset_type = FactoryGirl.build(:valid_asset_type)
         post :create, asset_type: valid_asset_type, format: :json
         response.body.should include (valid_asset_type.name)
@@ -42,8 +42,60 @@ describe AssetTypesController do
         expect(response.body).to eq("{\"image_path\":[\"can't be blank\"]}")
       end
 
-      it 'respond with a 201' do
+      it 'respond with a 422' do
         post :create, asset_type: FactoryGirl.attributes_for(:invalid_asset_type), format: :json
+        response.status.should eq(422)
+      end
+
+    end
+
+  end
+
+  describe 'PUT #update' do
+
+    describe 'With valid attributes' do
+
+      before(:each) do
+        @asset_type = FactoryGirl.create(:valid_asset_type)
+        @valid_asset_type = FactoryGirl.attributes_for(:valid_asset_type, name: 'keyboard')
+      end
+
+      it 'should update an existing asset type' do
+        put :update, asset_type: @valid_asset_type, id: @asset_type._id, format: :json
+        controller.instance_variable_get(:@asset_type)[:name].should == @valid_asset_type[:name]
+      end
+
+      it 'renders the updated asset_type as json' do
+        put :update, asset_type: @valid_asset_type, id: @asset_type._id, format: :json
+        response.body.should include (@valid_asset_type[:name])
+      end
+
+      it 'respond with a 201' do
+        put :update, asset_type: @valid_asset_type, id: @asset_type._id, format: :json
+        response.status.should eq(201)
+      end
+
+    end
+
+    describe 'with invalid attributes' do
+
+      before(:each) do
+        @asset_type = FactoryGirl.create(:valid_asset_type)
+        @invalid_asset_type = FactoryGirl.attributes_for(:valid_asset_type, name: '')
+      end
+
+      it 'should not update an existing asset type' do
+        put :update, asset_type: @invalid_asset_type, id: @asset_type._id, format: :json
+        controller.instance_variable_get(:@asset_type)[:name].should == @invalid_asset_type[:name]
+      end
+
+      it 'should render the errors as json' do
+        put :update, asset_type: @invalid_asset_type, id: @asset_type._id, format: :json
+        expect(response.body).to eq("{\"name\":[\"can't be blank\"]}")
+      end
+
+      it 'respond with a 422' do
+        put :update, asset_type: @invalid_asset_type, id: @asset_type._id, format: :json
         response.status.should eq(422)
       end
 

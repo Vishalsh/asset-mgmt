@@ -4,22 +4,21 @@
 
   <table class='table table-striped table-bordered'>
     <thead>
-        <tr>
-            <th>Name</th>
-            <th>Properties</th>
-        </tr>
+			<tr>
+				<th>Name</th>
+				<th>Properties</th>
+				<th></th>
+			</tr>
     </thead>
     <tbody>
-
-        <@ _.each(asset_types, function(asset_type) { @>
-            <tr>
-                <td><@= asset_type.get('name') @></td>
-                <td><@= asset_type.get('properties') @></td>
-            </tr>
-        <@ }); @>
-
-           </tbody>
+			<@ _.each(asset_types, function(asset_type) { @>
+					<tr>
+							<td><@= asset_type.get('name') @></td>
+							<td><@= asset_type.get('properties') @></td>
+							<td><a href="#asset_types/<@= asset_type.get('_id')['$oid'] @>/edit" class="glyphicon glyphicon-pencil"></a></td>
+					</tr>
+			<@ }); @>
+    </tbody>
   </table>
-
 
 </script>

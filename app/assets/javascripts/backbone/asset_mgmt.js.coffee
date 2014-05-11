@@ -16,4 +16,6 @@ $(document).ready ->
   new App.Routers.Asset_type;
 
   Backbone.history.start()
+
+
   return

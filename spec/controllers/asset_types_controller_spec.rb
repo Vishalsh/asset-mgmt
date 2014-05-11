@@ -70,9 +70,9 @@ describe AssetTypesController do
         response.body.should include (@valid_asset_type[:name])
       end
 
-      it 'respond with a 201' do
+      it 'respond with a 200' do
         put :update, asset_type: @valid_asset_type, id: @asset_type._id, format: :json
-        response.status.should eq(201)
+        response.status.should eq(200)
       end
 
     end
@@ -99,6 +99,28 @@ describe AssetTypesController do
         response.status.should eq(422)
       end
 
+    end
+
+  end
+
+  describe 'DELETE #destroy' do
+
+    before(:each) do
+      @asset_type = FactoryGirl.create(:valid_asset_type)
+    end
+
+    it 'should delete an asset type' do
+      expect { delete :destroy, id: @asset_type._id, format: :json }.to change(AssetType, :count).by(-1)
+    end
+
+    it 'should render the deleted asset type' do
+      delete :destroy, id: @asset_type._id, format: :json
+      response.body.should include (@asset_type[:name])
+    end
+
+    it 'respond with a 200' do
+      delete :destroy, id: @asset_type._id, format: :json
+      response.status.should eq(200)
     end
 
   end

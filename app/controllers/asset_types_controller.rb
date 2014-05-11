@@ -32,7 +32,7 @@ class AssetTypesController < ApplicationController
     @asset_type = AssetType.find(params[:id])
     if @asset_type.update_attributes(name: params[:asset_type][:name], image_path: params[:asset_type][:image_path], properties: params[:asset_type][:properties])
       respond_to do |format|
-        format.json { render json: @asset_type, status: :created }
+        format.json { render json: @asset_type, status: :ok }
       end
     else
       respond_to do |format|
@@ -42,5 +42,12 @@ class AssetTypesController < ApplicationController
 
   end
 
+  def destroy
+    asset_type = AssetType.find(params[:id])
+    asset_type.destroy
+    respond_to do |format|
+      format.json { render json: asset_type, status: :ok }
+    end
+  end
 
 end

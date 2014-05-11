@@ -87,3 +87,17 @@ App.Views.Asset_type_new = Backbone.View.extend({
 });
 
 
+App.Views.Asset_type_delete = Backbone.View.extend({
+
+
+    deleteAssetType: function(options) {
+        var asset_type = new App.Models.Asset_type({id: options.id});
+        var assetTypeRouter = new App.Routers.Asset_type;
+        asset_type.destroy({
+            success: function() {
+                assetTypeRouter.navigate('asset_types', {trigger: true});
+            }
+        })
+    }
+
+})

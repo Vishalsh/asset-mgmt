@@ -7,7 +7,7 @@ App.Views.Asset_type_list = Backbone.View.extend({
         var asset_types = new App.Collections.Asset_type;
         asset_types.fetch({
             success: function (asset_types) {
-                var template = _.template($('#asset_type_list').html(), {asset_types: asset_types.models, list_assets: 'active', new_asset: ''});
+                var template = _.template($('#asset_type_list').html(), {asset_types: asset_types.models, list: 'active', add_new: '', type: 'asset_types'});
                 self.$el.html(template);
             }
         });
@@ -15,7 +15,7 @@ App.Views.Asset_type_list = Backbone.View.extend({
 });
 
 
-App.Views.Asset_type_new = Backbone.View.extend({
+App.Views.Asset_type_edit = Backbone.View.extend({
 
     el: '.page-content',
 
@@ -35,13 +35,13 @@ App.Views.Asset_type_new = Backbone.View.extend({
             var asset_type = new App.Models.Asset_type({id: options.id})
             asset_type.fetch({
                 success: function (asset_type) {
-                    var template = _.template($("#asset_type_new").html(), {asset_type: asset_type, list_assets: '', new_asset: ''})
+                    var template = _.template($("#asset_type_new").html(), {asset_type: asset_type, list: '', add_new: '', type: 'asset_types'})
                     self.$el.html(template);
                 }
             });
         }
         else {
-            var template = _.template($("#asset_type_new").html(), {asset_type: null, list_assets: '', new_asset: 'active'})
+            var template = _.template($("#asset_type_new").html(), {asset_type: null, list: '', add_new: 'active', type: 'asset_types'})
             this.$el.html(template);
         }
 
@@ -58,15 +58,15 @@ App.Views.Asset_type_new = Backbone.View.extend({
         var assetTypeDetails = {name: name, image_path: image_path, properties: properties, id: id};
         var assetType = new App.Models.Asset_type;
         var assetTypeRouter = new App.Routers.Asset_type;
-        var assetTypeNewView = new App.Views.Asset_type_new;
+        var assetTypeEditView = new App.Views.Asset_type_edit;
 
         assetType.on('error', function (model, errors) {
-            assetTypeNewView.showErrors(errors);
+            assetTypeEditView.showErrors(errors);
         });
 
         assetType.save(assetTypeDetails, {
             success: function () {
-                assetTypeNewView.navigate(assetTypeRouter);
+                assetTypeEditView.navigate(assetTypeRouter);
             }
         });
 
@@ -83,21 +83,20 @@ App.Views.Asset_type_new = Backbone.View.extend({
         }
     }
 
-
 });
 
 
 App.Views.Asset_type_delete = Backbone.View.extend({
 
 
-    deleteAssetType: function(options) {
+    deleteAssetType: function (options) {
         var asset_type = new App.Models.Asset_type({id: options.id});
         var assetTypeRouter = new App.Routers.Asset_type;
         asset_type.destroy({
-            success: function() {
+            success: function () {
                 assetTypeRouter.navigate('asset_types', {trigger: true});
             }
         })
     }
 
-})
+});

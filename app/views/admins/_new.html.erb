@@ -1,0 +1,30 @@
+<script type="text/template" id="admin_new">
+
+	<%= render 'shared/navigation' %>
+
+<form class="admin-form">
+
+	<div class='form-horizontal'>
+
+		<div class="form-group">
+			<lable class="control-label">Ad id</label>
+			<input type="text" name="adId" id="admin_ad_id" class="form-control" value="<@= admin ? admin.get('ad_id') : '' @>" />
+			<div id="admin_ad_id_error" class="error"></div>
+		</div>
+
+		<div class="form-group">
+			<lable class="control-label">Name</label>
+			<input type="text" name="name" id="admin_name" class="form-control" value="<@= admin ? admin.get('name') : '' @>" />
+			<div id="admin_name_error" class="error"></div>
+		</div>
+
+		<@ if (admin) { @>
+			<input type="hidden" id="admin_id" value="<@= admin.get('_id')['$oid'] @>" />
+		<@ }; @>
+
+		<button type="submit" class="btn btn-primary"><@= admin ? 'Update' : 'Create' @></button>
+
+	</div>
+</form>
+
+</script>

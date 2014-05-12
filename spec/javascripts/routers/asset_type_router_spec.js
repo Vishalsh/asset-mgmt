@@ -20,9 +20,9 @@ describe("Asset type router", function () {
 //            expect(this.routeSpy).toHaveBeenCalledWith();
         });
 
-        it("fires the new_asset route with a asset_types/new hash", function () {
+        it("fires the add_new route with a asset_types/new hash", function () {
 
-            this.router.bind("route:new_asset", this.routeSpy);
+            this.router.bind("route:add_new", this.routeSpy);
             this.router.navigate("asset_types#new", true);
 //            expect(this.routeSpy).toHaveBeenCalledOnce();
 //            expect(this.routeSpy).toHaveBeenCalledWith();
@@ -50,18 +50,18 @@ describe("Asset type router", function () {
     });
 
 
-    describe("new_asset", function () {
+    describe("add_new", function () {
         beforeEach(function () {
             this.router = new App.Routers.Asset_type;
-            this.appRouterNewViewStub = sinon.stub(App.Views, "Asset_type_new").returns(new Backbone.View());
+            this.appRouterNewViewStub = sinon.stub(App.Views, "Asset_type_edit").returns(new Backbone.View());
         });
 
         afterEach(function () {
-            App.Views.Asset_type_new.restore();
+            App.Views.Asset_type_edit.restore();
         });
 
         it("creates a asset type new view", function () {
-            this.router.new_asset();
+            this.router.add_new();
 //            expect(this.appRouterListViewStub).toHaveBeenCalled();
         });
 

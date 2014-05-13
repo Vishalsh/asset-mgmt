@@ -1,0 +1,24 @@
+<script type="text/template" id="office_new">
+
+	<%= render 'shared/navigation' %>
+
+<form class="office-form">
+
+	<div class='form-horizontal'>
+
+		<div class="form-group">
+			<lable class="control-label">Name</label>
+			<input type="text" name="name" id="office_name" class="form-control" value="<@= office ? office.get('name') : '' @>" />
+			<div id="office_name_error" class="error"></div>
+		</div>
+
+		<@ if (office) { @>
+			<input type="hidden" id="office_id" value="<@= office.get('_id')['$oid'] @>" />
+		<@ }; @>
+
+		<button type="submit" class="btn btn-primary"><@= office ? 'Update' : 'Create' @></button>
+
+	</div>
+</form>
+
+</script>

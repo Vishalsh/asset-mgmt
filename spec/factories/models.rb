@@ -3,7 +3,7 @@
 FactoryGirl.define do
 
   factory :valid_model, class: Model do |f|
-    f.name 'India'
+    f.name '15 macbook pro'
   end
 
   factory :invalid_model, class: Model do |f|

@@ -17,7 +17,7 @@
 							<td><@= asset_type.get('name') @></td>
 							<td><@= asset_type.get('properties') @></td>
 							<td><a href="#asset_types/<@= asset_type.get('_id')['$oid'] @>/edit" class="glyphicon glyphicon-pencil"></a></td>
-							<td><a href="#asset_types/<@= asset_type.get('_id')['$oid'] @>" class="glyphicon glyphicon-trash delete-asset-type" data-confirm="Are you sure?"></a></td>
+							<td><a href="#asset_types/<@= asset_type.get('_id')['$oid'] @>" class="glyphicon glyphicon-trash" data-confirm="Are you sure?"></a></td>
 					</tr>
 			<@ }); @>
     </tbody>

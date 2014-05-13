@@ -15,7 +15,7 @@
 					<tr>
 							<td><@= company.get('name') @></td>
 							<td><a href="#companies/<@= company.get('_id')['$oid'] @>/edit" class="glyphicon glyphicon-pencil"></a></td>
-							<td><a href="#companies/<@= company.get('_id')['$oid'] @>" class="glyphicon glyphicon-trash delete-asset-type" data-confirm="Are you sure?"></a></td>
+							<td><a href="#companies/<@= company.get('_id')['$oid'] @>" class="glyphicon glyphicon-trash" data-confirm="Are you sure?"></a></td>
 					</tr>
 			<@ }); @>
     </tbody>

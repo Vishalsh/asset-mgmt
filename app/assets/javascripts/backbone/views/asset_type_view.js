@@ -32,7 +32,8 @@ App.Views.Asset_type_edit = Backbone.View.extend({
         var self = this;
 
         if (options.id) {
-            var asset_type = new App.Models.Asset_type({id: options.id})
+            var asset_type = new App.Models.Asset_type();
+            asset_type.url = '/asset_types/' + options.id + '/edit';
             asset_type.fetch({
                 success: function (asset_type) {
                     var template = _.template($("#asset_type_new").html(), {asset_type: asset_type, list: '', add_new: '', type: 'asset_types'})

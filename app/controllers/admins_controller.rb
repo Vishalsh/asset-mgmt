@@ -20,6 +20,13 @@ class AdminsController < ApplicationController
     end
   end
 
+  def edit
+    @admin = Admin.find(params[:id])
+    respond_to do |format|
+      format.json { render json: @admin, status: :ok }
+    end
+  end
+
   def show
     admin = Admin.find(params[:id])
     respond_to do |format|

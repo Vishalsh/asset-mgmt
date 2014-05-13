@@ -32,7 +32,8 @@ App.Views.Office_edit = Backbone.View.extend({
         var self = this;
 
         if (options.id) {
-            var office = new App.Models.Office({id: options.id})
+            var office = new App.Models.Office();
+            office.url = '/offices/' + options.id + '/edit';
             office.fetch({
                 success: function (office) {
                     var template = _.template($("#office_new").html(), {office: office, list: '', add_new: '', type: 'offices'})

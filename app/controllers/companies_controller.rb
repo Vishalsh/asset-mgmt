@@ -20,6 +20,13 @@ class CompaniesController < ApplicationController
     end
   end
 
+  def edit
+    @company = Company.find(params[:id])
+    respond_to do |format|
+      format.json { render json: @company, status: :ok }
+    end
+  end
+
   def show
     company = Company.find(params[:id])
     respond_to do |format|

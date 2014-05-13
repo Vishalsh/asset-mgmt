@@ -3,11 +3,13 @@ require 'spec_helper'
 describe OfficesController do
 
   describe 'GET #index' do
+
     it 'should render the companies' do
       get :index, format: :json
       office = FactoryGirl.create(:valid_office);
       assigns(:offices).should include(office)
     end
+
   end
 
   describe 'POST #create' do
@@ -51,6 +53,29 @@ describe OfficesController do
 
   end
 
+  describe 'GET #edit' do
+
+    before(:each) do
+      @office = FactoryGirl.create(:valid_office)
+    end
+
+    it 'should get the correct office' do
+      get :edit, id: @office.id, format: :json
+      controller.instance_variable_get(:@office).should == @office
+    end
+
+    it 'renders the office as json' do
+      get :edit, id: @office.id, format: :json
+      response.body.should include (@office.name)
+    end
+
+    it 'respond with a 200' do
+      get :edit, id: @office.id, format: :json
+      response.status.should eq(200)
+    end
+
+  end
+  
   describe 'PUT #update' do
 
     describe 'With valid attributes' do

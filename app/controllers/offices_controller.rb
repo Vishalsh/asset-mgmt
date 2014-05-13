@@ -20,6 +20,13 @@ class OfficesController < ApplicationController
     end
   end
 
+  def edit
+    @office = Office.find(params[:id])
+    respond_to do |format|
+      format.json { render json: @office, status: :ok }
+    end
+  end
+
   def show
     office = Office.find(params[:id])
     respond_to do |format|

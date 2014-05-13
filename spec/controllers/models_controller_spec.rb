@@ -3,11 +3,13 @@ require 'spec_helper'
 describe ModelsController do
 
   describe 'GET #index' do
+
     it 'should render the companies' do
       get :index, format: :json
       model = FactoryGirl.create(:valid_model);
       assigns(:models).should include(model)
     end
+
   end
 
   describe 'POST #create' do
@@ -47,6 +49,29 @@ describe ModelsController do
         response.status.should eq(422)
       end
 
+    end
+
+  end
+
+  describe 'GET #edit' do
+
+    before(:each) do
+      @model = FactoryGirl.create(:valid_model)
+    end
+
+    it 'should get the correct model' do
+      get :edit, id: @model.id, format: :json
+      controller.instance_variable_get(:@model).should == @model
+    end
+
+    it 'renders the model as json' do
+      get :edit, id: @model.id, format: :json
+      response.body.should include (@model.name)
+    end
+
+    it 'respond with a 200' do
+      get :edit, id: @model.id, format: :json
+      response.status.should eq(200)
     end
 
   end

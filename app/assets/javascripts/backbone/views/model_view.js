@@ -32,7 +32,8 @@ App.Views.Model_edit = Backbone.View.extend({
         var self = this;
 
         if (options.id) {
-            var model = new App.Models.Model({id: options.id})
+            var model = new App.Models.Model();
+            model.url = '/models/' + options.id + '/edit';
             model.fetch({
                 success: function (model) {
                     var template = _.template($("#model_new").html(), {model: model, list: '', add_new: '', type: 'models'})

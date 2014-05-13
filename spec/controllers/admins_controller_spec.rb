@@ -3,11 +3,13 @@ require 'spec_helper'
 describe AdminsController do
 
   describe 'GET #index' do
+
     it 'should render the admins' do
       get :index, format: :json
       admin = FactoryGirl.create(:valid_admin);
       assigns(:admins).should include(admin)
     end
+
   end
 
   describe 'POST #create' do
@@ -99,6 +101,29 @@ describe AdminsController do
         response.status.should eq(422)
       end
 
+    end
+
+  end
+
+  describe 'GET #edit' do
+
+    before(:each) do
+      @admin = FactoryGirl.create(:valid_admin)
+    end
+
+    it 'should get the correct admin' do
+      get :edit, id: @admin.id, format: :json
+      controller.instance_variable_get(:@admin).should == @admin
+    end
+
+    it 'renders the admin as json' do
+      get :edit, id: @admin.id, format: :json
+      response.body.should include (@admin.name)
+    end
+
+    it 'respond with a 200' do
+      get :edit, id: @admin.id, format: :json
+      response.status.should eq(200)
     end
 
   end

@@ -3,11 +3,13 @@ require 'spec_helper'
 describe CompaniesController do
 
   describe 'GET #index' do
+
     it 'should render the companies' do
       get :index, format: :json
       company = FactoryGirl.create(:valid_company);
       assigns(:companies).should include(company)
     end
+
   end
 
   describe 'POST #create' do
@@ -51,6 +53,29 @@ describe CompaniesController do
 
   end
 
+  describe 'GET #edit' do
+
+    before(:each) do
+      @company = FactoryGirl.create(:valid_company)
+    end
+
+    it 'should get the correct company' do
+      get :edit, id: @company.id, format: :json
+      controller.instance_variable_get(:@company).should == @company
+    end
+
+    it 'renders the company as json' do
+      get :edit, id: @company.id, format: :json
+      response.body.should include (@company.name)
+    end
+
+    it 'respond with a 200' do
+      get :edit, id: @company.id, format: :json
+      response.status.should eq(200)
+    end
+
+  end
+
   describe 'PUT #update' do
 
     describe 'With valid attributes' do
@@ -65,7 +90,7 @@ describe CompaniesController do
         controller.instance_variable_get(:@company)[:name].should == @valid_company[:name]
       end
 
-      it 'renders the updated asset_type as json' do
+      it 'renders the updated company as json' do
         put :update, company: @valid_company, id: @company._id, format: :json
         response.body.should include (@valid_company[:name])
       end

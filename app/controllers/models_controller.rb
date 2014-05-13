@@ -20,6 +20,13 @@ class ModelsController < ApplicationController
     end
   end
 
+  def edit
+    @model = Model.find(params[:id])
+    respond_to do |format|
+      format.json { render json: @model, status: :ok }
+    end
+  end
+
   def show
     model = Model.find(params[:id])
     respond_to do |format|

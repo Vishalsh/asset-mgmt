@@ -3,11 +3,13 @@ require 'spec_helper'
 describe AssetTypesController do
 
   describe 'GET #index' do
+    
     it 'should render the asset_types' do
       get :index
       asset_type = FactoryGirl.create(:valid_asset_type);
       assigns(:asset_types).should include(asset_type)
     end
+    
   end
 
   describe 'POST #create' do
@@ -47,6 +49,29 @@ describe AssetTypesController do
         response.status.should eq(422)
       end
 
+    end
+
+  end
+
+  describe 'GET #edit' do
+
+    before(:each) do
+      @asset_type = FactoryGirl.create(:valid_asset_type)
+    end
+
+    it 'should get the correct asset_type' do
+      get :edit, id: @asset_type.id, format: :json
+      controller.instance_variable_get(:@asset_type).should == @asset_type
+    end
+
+    it 'renders the asset_type as json' do
+      get :edit, id: @asset_type.id, format: :json
+      response.body.should include (@asset_type.name)
+    end
+
+    it 'respond with a 200' do
+      get :edit, id: @asset_type.id, format: :json
+      response.status.should eq(200)
     end
 
   end

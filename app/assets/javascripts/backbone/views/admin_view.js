@@ -6,7 +6,7 @@ App.Views.Admin = Backbone.View.extend({
         var self = this;
         var admins = new App.Collections.Admin;
         admins.fetch({
-            success: function (asset_types) {
+            success: function (admins) {
                 var template = _.template($('#admin_list').html(), {admins: admins.models, list: 'active', add_new: '', type: 'admins'});
                 self.$el.html(template);
             }
@@ -31,7 +31,8 @@ App.Views.Admin_edit = Backbone.View.extend({
         var self = this;
 
         if (options.id) {
-            var admin = new App.Models.Admin({id: options.id})
+            var admin = new App.Models.Admin();
+            admin.url = '/admins/' + options.id + '/edit';
             admin.fetch({
                 success: function (admin) {
                     var template = _.template($("#admin_new").html(), {admin: admin, list: '', add_new: '', type: 'admins'})

@@ -32,7 +32,8 @@ App.Views.Company_edit = Backbone.View.extend({
         var self = this;
 
         if (options.id) {
-            var company = new App.Models.Company({id: options.id})
+            var company = new App.Models.Company();
+            company.url = '/companies/' + options.id + '/edit';
             company.fetch({
                 success: function (company) {
                     var template = _.template($("#company_new").html(), {company: company, list: '', add_new: '', type: 'companies'})

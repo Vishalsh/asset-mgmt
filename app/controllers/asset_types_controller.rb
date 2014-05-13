@@ -21,6 +21,14 @@ class AssetTypesController < ApplicationController
     end
   end
 
+  def edit
+    @asset_type = AssetType.find(params[:id])
+    respond_to do |format|
+      format.json { render json: @asset_type, status: :ok }
+    end
+  end
+
+
   def show
     asset_type = AssetType.find(params[:id])
     respond_to do |format|

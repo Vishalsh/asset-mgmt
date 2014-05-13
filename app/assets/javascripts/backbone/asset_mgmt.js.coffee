@@ -15,6 +15,7 @@ $(document).ready ->
   new App.Routers.Asset;
   new App.Routers.Asset_type;
   new App.Routers.Company;
+  new App.Routers.Model;
 
   Backbone.history.start()
 

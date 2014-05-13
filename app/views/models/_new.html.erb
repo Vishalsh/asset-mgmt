@@ -1,0 +1,24 @@
+<script type="text/template" id="model_new">
+
+	<%= render 'shared/navigation' %>
+
+<form class="model-form">
+
+	<div class='form-horizontal'>
+
+		<div class="form-group">
+			<lable class="control-label">Name</label>
+			<input type="text" name="name" id="model_name" class="form-control" value="<@= model ? model.get('name') : '' @>" />
+			<div id="model_name_error" class="error"></div>
+		</div>
+
+		<@ if (model) { @>
+			<input type="hidden" id="model_id" value="<@= model.get('_id')['$oid'] @>" />
+		<@ }; @>
+
+		<button type="submit" class="btn btn-primary"><@= model ? 'Update' : 'Create' @></button>
+
+	</div>
+</form>
+
+</script>

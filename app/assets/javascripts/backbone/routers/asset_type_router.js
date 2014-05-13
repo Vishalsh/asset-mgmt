@@ -16,10 +16,9 @@ App.Routers.Asset_type = Backbone.Router.extend({
         asset_type_edit_view.render({id: id});
     },
 
-    destroy: function(id) {
+    destroy: function (id) {
         var asset_type_delete = new App.Views.Asset_type_delete;
-        asset_type_delete.deleteAssetType({id: id})
+        asset_type_delete.deleteAssetType({id: id});
     }
-
 });
 

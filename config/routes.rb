@@ -10,6 +10,7 @@ AssetMgmt::Application.routes.draw do
   resources :admins
   resources :companies
   resources :models
+  resources :offices
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

@@ -13,6 +13,7 @@ gem "rails-backbone"
 gem 'underscore-rails'
 gem 'requirejs-rails', '~> 0.9.2'
 
+
 group :test, :development do
   gem "rspec-rails", "~> 2.14.0"
   gem 'factory_girl_rails'
@@ -21,6 +22,8 @@ group :test, :development do
   gem 'sinon-rails'
   gem 'simplecov', require: false
   gem 'database_cleaner'
+  gem 'cucumber-rails', :require => false
+
 end
 
 group :development do

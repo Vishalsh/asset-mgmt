@@ -1,0 +1,24 @@
+<script type="text/template" id="company_new">
+
+	<%= render 'shared/navigation' %>
+
+<form class="company-form">
+
+	<div class='form-horizontal'>
+
+		<div class="form-group">
+			<lable class="control-label">Name</label>
+			<input type="text" name="name" id="company_name" class="form-control" value="<@= company ? company.get('name') : '' @>" />
+			<div id="company_name_error" class="error"></div>
+		</div>
+
+		<@ if (company) { @>
+			<input type="hidden" id="company_id" value="<@= company.get('_id')['$oid'] @>" />
+		<@ }; @>
+
+		<button type="submit" class="btn btn-primary"><@= company ? 'Update' : 'Create' @></button>
+
+	</div>
+</form>
+
+</script>

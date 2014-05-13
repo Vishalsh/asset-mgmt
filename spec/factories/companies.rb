@@ -3,7 +3,7 @@
 FactoryGirl.define do
 
   factory :valid_company, class: Company do |f|
-    f.name 'India'
+    f.name 'Apple'
   end
 
   factory :invalid_company, class: Company do |f|

@@ -23,7 +23,10 @@ group :test, :development do
   gem 'simplecov', require: false
   gem 'database_cleaner'
   gem 'cucumber-rails', :require => false
-
+  gem 'selenium-webdriver'
+  gem 'capybara'
+  gem 'capybara-webkit', '0.14.2'
+  gem 'capybara-page-object'
 end
 
 group :development do

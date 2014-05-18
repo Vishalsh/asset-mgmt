@@ -1,0 +1,49 @@
+<script type="text/template" id="asset_new">
+
+	<%= render 'shared/navigation' %>
+
+<form class="asset-form">
+
+	<div class='form-horizontal'>
+
+		<div class="form-group">
+			<lable class="control-label">Invoice Number</label>
+			<input type="text" name="invoiceNumber" id="asset_invoice_number" class="form-control" value="<@= asset ? asset.get('invoice_number') : '' @>" />
+			<div id="asset_invoice_number_error" class="error"></div>
+		</div>
+
+		<div class="form-group">
+			<lable class="control-label">Serial Number</label>
+			<input type="text" name="serialNumber" id="asset_serial_number" class="form-control" value="<@= asset ? asset.get('serial_number') : '' @>"/>
+			<div id="asset_serial_number_error" class="error"></div>
+		</div>
+
+		<div class="form-group">
+			<lable class="control-label">Purchased Date</label>
+			<input type="text" name="purchasedDate" id="asset_purchased_date" class="form-control" value="<@= asset ? asset.get('purchased_date') : '' @>"/>
+			<div id="asset_purchased_date_error" class="error"></div>
+		</div>
+
+		<div class="form-group">
+			<lable class="control-label">Mac Address</label>
+			<input type="text" name="macAddress" id="asset_mac_address" class="form-control" value="<@= asset ? asset.get('mac_address') : '' @>"/>
+			<div id="asset_mac_address_error" class="error"></div>
+		</div>
+
+		<div class="form-group">
+			<lable class="control-label">Warranty</label>
+			<input type="text" name="warranty" id="asset_warranty" class="form-control" value="<@= asset ? asset.get('warranty') : '' @>"/>
+			<div id="asset_warranty_error" class="error"></div>
+		</div>
+
+		<@ if (asset) { @>
+			<input type="hidden" id="asset_id" value="<@= asset.get('_id')['$oid'] @>" />
+		<@ }; @>
+
+		<button type="submit" class="btn btn-primary"><@= asset ? 'Update' : 'Create' @></button>
+
+	</div>
+</form>
+
+
+</script>

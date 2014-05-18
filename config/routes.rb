@@ -7,6 +7,7 @@ AssetMgmt::Application.routes.draw do
   root 'asset_types#index'
 
   resources :asset_types
+  resources :assets
   resources :admins
   resources :companies
   resources :models

@@ -30,6 +30,7 @@ App.Views.Asset_edit = Backbone.View.extend({
     render: function (options) {
 
         var self = this;
+        var assetEditView = new App.Views.Asset_edit;
 
         if (options.id) {
             var asset = new App.Models.Asset();
@@ -45,7 +46,15 @@ App.Views.Asset_edit = Backbone.View.extend({
             var template = _.template($("#asset_new").html(), {asset: null, list: '', add_new: 'active', type: 'assets'})
             this.$el.html(template);
         }
+        assetEditView.applyDatepicker();
+    },
 
+    applyDatepicker: function() {
+        setTimeout(function() {
+            $("#asset_purchased_date").datepicker().on('changeDate', function(){
+              $(this).datepicker('hide');
+            });
+        }, 0)
     },
 
     saveAsset: function (e) {

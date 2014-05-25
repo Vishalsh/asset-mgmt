@@ -20,7 +20,7 @@
 
 		<div class="form-group">
 			<lable class="control-label">Purchased Date</label>
-			<input type="text" name="purchasedDate" id="asset_purchased_date" class="form-control" value="<@= asset ? asset.get('purchased_date') : '' @>"/>
+			<input type="text" name="purchasedDate" id="asset_purchased_date" class="form-control" data-date-format="dd-mm-yyyy" value="<@= asset ? asset.get('purchased_date') : '' @>"/>
 			<div id="asset_purchased_date_error" class="error"></div>
 		</div>
 

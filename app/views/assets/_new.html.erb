@@ -31,8 +31,20 @@
 		</div>
 
 		<div class="form-group">
+			<lable class="control-label">Asset Type</label>
+			<select name="assetType" id="asset_asset_type" class="form-control" >
+
+			</select>
+			<div id="asset_mac_address_error" class="error"></div>
+		</div>
+
+		<div class="form-group">
 			<lable class="control-label">Warranty</label>
-			<input type="text" name="warranty" id="asset_warranty" class="form-control" value="<@= asset ? asset.get('warranty') : '' @>"/>
+			<select name="warranty" id="asset_warranty" class="form-control">
+				<option value="1 year">1 year</option>
+				<option value="2 year">2 year</option>
+				<option value="3 year">3 year</option>
+			</select>
 			<div id="asset_warranty_error" class="error"></div>
 		</div>
 
@@ -44,6 +56,10 @@
 
 	</div>
 </form>
+
+
+
+
 
 
 </script>

@@ -11,6 +11,7 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.ui.all
 //= require jquery_ujs
 //= require bootstrap
 //= require underscore
@@ -19,8 +20,8 @@
 //= require sinon
 //= require backbone_rails_sync
 //= require backbone_datalink
-//= require backbone/asset_mgmt
 //= require_tree .
+//= require backbone/asset_mgmt
 
 _.templateSettings = {
     interpolate: /\<\@\=(.+?)\@\>/gim,

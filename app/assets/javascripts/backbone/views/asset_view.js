@@ -31,6 +31,14 @@ App.Views.Asset_edit = Backbone.View.extend({
 
         var self = this;
         var assetEditView = new App.Views.Asset_edit;
+        var assetTypes;
+
+        $.when(assetEditView.getAssetTypes()).then(
+            function (asset_types) {
+                assetTypes = _.pluck(asset_types, 'name');
+                assetEditView.applySelectBox(assetTypes);
+            }
+        );
 
         if (options.id) {
             var asset = new App.Models.Asset();
@@ -49,12 +57,34 @@ App.Views.Asset_edit = Backbone.View.extend({
         assetEditView.applyDatepicker();
     },
 
-    applyDatepicker: function() {
-        setTimeout(function() {
-            $("#asset_purchased_date").datepicker().on('changeDate', function(){
-              $(this).datepicker('hide');
+    applyDatepicker: function () {
+        setTimeout(function () {
+            $("#asset_purchased_date").datepicker().on('changeDate', function () {
+                $(this).datepicker('hide');
             });
-        }, 0)
+        }, 500)
+    },
+
+    applySelectBox: function (assetTypes) {
+        $("#asset_warranty").selectBoxIt();
+        $("#asset_asset_type").selectBoxIt({
+            populate: assetTypes
+        });
+
+    },
+
+    getAssetTypes: function () {
+
+        var deferred = $.Deferred();
+        $.ajax({
+            url: '/asset_types',
+            type: 'GET',
+            dataType: 'json',
+            success: function (asset_types) {
+                deferred.resolve(asset_types);
+            }
+        });
+        return deferred.promise();
     },
 
     saveAsset: function (e) {
@@ -68,7 +98,7 @@ App.Views.Asset_edit = Backbone.View.extend({
         var warranty = $("#asset_warranty").val();
         var id = $("#asset_id").val();
         var assetDetails = {invoice_number: invoice_number, serial_number: serial_number, purchased_date: purchased_date,
-                                mac_address: mac_address,warranty: warranty, id: id};
+            mac_address: mac_address, warranty: warranty, id: id};
         var asset = new App.Models.Asset;
         var assetRouter = new App.Routers.Asset;
         var assetEditView = new App.Views.Asset_edit;

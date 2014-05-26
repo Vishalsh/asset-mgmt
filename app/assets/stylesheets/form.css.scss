@@ -1,0 +1,19 @@
+.form-horizontal {
+
+  .form-group {
+    margin: 0 0 15px;
+  }
+
+  .control-label {
+    text-align: left;
+  }
+
+  sup, .error {
+    color: red;
+  }
+
+  .error {
+    padding-top: 7px;
+  }
+
+}

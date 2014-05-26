@@ -6,15 +6,19 @@
 
 	<div class='form-horizontal'>
 
-		<div class="form-group">
-			<lable class="control-label">Ad id</label>
-			<input type="text" name="adId" id="admin_ad_id" class="form-control" value="<@= admin ? admin.get('ad_id') : '' @>" />
+		<div class="form-group row">
+			<label class="control-label col-md-2">Ad id<sup>*</sup></label>
+			<div class="col-md-6">
+				<input type="text" name="adId" id="admin_ad_id" class="form-control" value="<@= admin ? admin.get('ad_id') : '' @>" />
+			</div>
 			<div id="admin_ad_id_error" class="error"></div>
 		</div>
 
-		<div class="form-group">
-			<lable class="control-label">Name</label>
-			<input type="text" name="name" id="admin_name" class="form-control" value="<@= admin ? admin.get('name') : '' @>" />
+		<div class="form-group row">
+			<label class="control-label col-md-2">Name<sup>*</sup></label>
+			<div class="col-md-6">
+				<input type="text" name="name" id="admin_name" class="form-control  col-md-8" value="<@= admin ? admin.get('name') : '' @>" />
+			</div>
 			<div id="admin_name_error" class="error"></div>
 		</div>
 
@@ -22,9 +26,15 @@
 			<input type="hidden" id="admin_id" value="<@= admin.get('_id')['$oid'] @>" />
 		<@ }; @>
 
-		<button type="submit" class="btn btn-primary"><@= admin ? 'Update' : 'Create' @></button>
+		<div class="form-group">
+			<div class="col-md-offset-2 col-md-4">
+				<button type="submit" class="btn btn-primary"><@= admin ? 'Update' : 'Create' @></button>
+			</div>
+		</div>
 
 	</div>
+
 </form>
+
 
 </script>

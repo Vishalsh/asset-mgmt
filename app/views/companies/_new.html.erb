@@ -7,8 +7,10 @@
 	<div class='form-horizontal'>
 
 		<div class="form-group">
-			<lable class="control-label">Name</label>
-			<input type="text" name="name" id="company_name" class="form-control" value="<@= company ? company.get('name') : '' @>" />
+			<label class="control-label col-md-2">Name<sup>*</sup></label>
+			<div class="col-md-6">
+				<input type="text" name="name" id="company_name" class="form-control" value="<@= company ? company.get('name') : '' @>" />
+			</div>
 			<div id="company_name_error" class="error"></div>
 		</div>
 
@@ -16,7 +18,11 @@
 			<input type="hidden" id="company_id" value="<@= company.get('_id')['$oid'] @>" />
 		<@ }; @>
 
-		<button type="submit" class="btn btn-primary"><@= company ? 'Update' : 'Create' @></button>
+		<div class="form-group">
+			<div class="col-md-offset-2 col-md-4">
+				<button type="submit" class="btn btn-primary"><@= company ? 'Update' : 'Create' @></button>
+			</div>
+		</div>
 
 	</div>
 </form>

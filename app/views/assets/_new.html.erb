@@ -7,44 +7,54 @@
 	<div class='form-horizontal'>
 
 		<div class="form-group">
-			<lable class="control-label">Invoice Number</label>
-			<input type="text" name="invoiceNumber" id="asset_invoice_number" class="form-control" value="<@= asset ? asset.get('invoice_number') : '' @>" />
+			<label class="control-label col-md-2">Invoice Number<sup>*</sup></label>
+			<div class="col-md-6">
+				<input type="text" name="invoiceNumber" id="asset_invoice_number" class="form-control" value="<@= asset ? asset.get('invoice_number') : '' @>" />
+			</div>
 			<div id="asset_invoice_number_error" class="error"></div>
 		</div>
 
 		<div class="form-group">
-			<lable class="control-label">Serial Number</label>
-			<input type="text" name="serialNumber" id="asset_serial_number" class="form-control" value="<@= asset ? asset.get('serial_number') : '' @>"/>
+			<label class="control-label col-md-2">Serial Number<sup>*</sup></label>
+			<div class="col-md-6">
+				<input type="text" name="serialNumber" id="asset_serial_number" class="form-control" value="<@= asset ? asset.get('serial_number') : '' @>"/>
+			</div>
 			<div id="asset_serial_number_error" class="error"></div>
 		</div>
 
 		<div class="form-group">
-			<lable class="control-label">Purchased Date</label>
-			<input type="text" name="purchasedDate" id="asset_purchased_date" class="form-control" data-date-format="dd-mm-yyyy" value="<@= asset ? asset.get('purchased_date') : '' @>"/>
+			<label class="control-label col-md-2">Purchased Date<sup>*</sup></label>
+			<div class="col-md-6">
+				<input type="text" name="purchasedDate" id="asset_purchased_date" class="form-control" data-date-format="dd-mm-yyyy" value="<@= asset ? asset.get('purchased_date') : '' @>"/>
+			</div>
 			<div id="asset_purchased_date_error" class="error"></div>
 		</div>
 
 		<div class="form-group">
-			<lable class="control-label">Mac Address</label>
-			<input type="text" name="macAddress" id="asset_mac_address" class="form-control" value="<@= asset ? asset.get('mac_address') : '' @>"/>
+			<label class="control-label col-md-2">Mac Address<sup>*</sup></label>
+			<div class="col-md-6">
+				<input type="text" name="macAddress" id="asset_mac_address" class="form-control" value="<@= asset ? asset.get('mac_address') : '' @>"/>
+			</div>
 			<div id="asset_mac_address_error" class="error"></div>
 		</div>
 
 		<div class="form-group">
-			<lable class="control-label">Asset Type</label>
-			<select name="assetType" id="asset_asset_type" class="form-control" >
-
-			</select>
+			<label class="control-label col-md-2">Asset Type<sup>*</sup></label>
+			<div class="col-md-6">
+				<input name="assetType" id="asset_asset_type"/>
+			</div>
 			<div id="asset_mac_address_error" class="error"></div>
 		</div>
 
 		<div class="form-group">
-			<lable class="control-label">Warranty</label>
-			<select name="warranty" id="asset_warranty" class="form-control">
-				<option value="1 year">1 year</option>
-				<option value="2 year">2 year</option>
-				<option value="3 year">3 year</option>
-			</select>
+			<label class="control-label col-md-2">Warranty<sup>*</sup></label>
+			<div class="col-md-6">
+				<select name="warranty" id="asset_warranty" >
+					<option value="1 year">1 year</option>
+					<option value="2 year">2 year</option>
+					<option value="3 year">3 year</option>
+				</select>
+			</div>
 			<div id="asset_warranty_error" class="error"></div>
 		</div>
 
@@ -52,7 +62,12 @@
 			<input type="hidden" id="asset_id" value="<@= asset.get('_id')['$oid'] @>" />
 		<@ }; @>
 
-		<button type="submit" class="btn btn-primary"><@= asset ? 'Update' : 'Create' @></button>
+
+		<div class="form-group">
+			<div class="col-md-offset-2 col-md-4">
+				<button type="submit" class="btn btn-primary"><@= asset ? 'Update' : 'Create' @></button>
+			</div>
+		</div>
 
 	</div>
 </form>

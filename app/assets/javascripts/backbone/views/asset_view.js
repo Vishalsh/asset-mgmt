@@ -35,8 +35,11 @@ App.Views.Asset_edit = Backbone.View.extend({
 
         $.when(assetEditView.getAssetTypes()).then(
             function (asset_types) {
-                assetTypes = _.pluck(asset_types, 'name');
-                assetEditView.applySelectBox(assetTypes);
+                $.each(asset_types, function (i, asset) {
+                    asset['id'] = asset['_id'];
+                });
+
+                assetEditView.applySelectBox(asset_types);
             }
         );
 
@@ -66,11 +69,15 @@ App.Views.Asset_edit = Backbone.View.extend({
     },
 
     applySelectBox: function (assetTypes) {
-        $("#asset_warranty").selectBoxIt();
-        $("#asset_asset_type").selectBoxIt({
-            populate: assetTypes
+        $("#asset_warranty").select2();
+        $("#asset_asset_type").select2({
+            data: { results: assetTypes, text: 'name' },
+            formatSelection: format,
+            formatResult: format
         });
-
+        function format(item) {
+            return item.name;
+        }
     },
 
     getAssetTypes: function () {

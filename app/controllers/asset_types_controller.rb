@@ -9,7 +9,10 @@ class AssetTypesController < ApplicationController
   end
 
   def create
-    asset_type = AssetType.new(name: params[:asset_type][:name], image_path: params[:asset_type][:image_path], properties: params[:asset_type][:properties])
+    asset_type = AssetType.new(name: params[:asset_type][:name], image_path: params[:asset_type][:image_path])
+    asset_type_properties = asset_type.trim_properties params[:asset_type][:properties]
+    asset_type.properties = asset_type_properties
+
     if asset_type.save
       respond_to do |format|
         format.json { render json: asset_type, status: :created }
@@ -38,7 +41,8 @@ class AssetTypesController < ApplicationController
 
   def update
     @asset_type = AssetType.find(params[:id])
-    if @asset_type.update_attributes(name: params[:asset_type][:name], image_path: params[:asset_type][:image_path], properties: params[:asset_type][:properties])
+    asset_type_properties = @asset_type.trim_properties params[:asset_type][:properties]
+    if @asset_type.update_attributes(name: params[:asset_type][:name], image_path: params[:asset_type][:image_path], properties: asset_type_properties)
       respond_to do |format|
         format.json { render json: @asset_type, status: :ok }
       end

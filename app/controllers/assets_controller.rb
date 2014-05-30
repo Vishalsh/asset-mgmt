@@ -8,9 +8,16 @@ class AssetsController < ApplicationController
   end
 
   def create
+
     asset = Asset.new(invoice_number: params[:asset][:invoice_number], serial_number: params[:asset][:serial_number],
                       purchased_date: params[:asset][:purchased_date], mac_address: params[:asset][:mac_address],
                       warranty: params[:asset][:warranty])
+
+    asset_type = AssetType.find_by({name: params[:asset_type]})
+    asset_type_properties = asset_type.properties
+    asset.asset_type = asset_type
+    asset.properties = asset.create_properties_hash(asset_type_properties, params)
+
     if asset.save
       respond_to do |format|
         format.json { render json: asset, status: :created }

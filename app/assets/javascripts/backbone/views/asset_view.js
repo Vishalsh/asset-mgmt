@@ -30,34 +30,34 @@ App.Views.Asset_edit = Backbone.View.extend({
     render: function (options) {
 
         var self = this;
-        var assetEditView = new App.Views.Asset_edit;
-        var assetTypes;
-
-        $.when(assetEditView.getAssetTypes()).then(
-            function (asset_types) {
-                $.each(asset_types, function (i, asset) {
-                    asset['id'] = asset['_id'];
-                });
-
-                assetEditView.applySelectBox(asset_types);
-            }
-        );
+        var asset = null;
 
         if (options.id) {
-            var asset = new App.Models.Asset();
-            asset.url = '/assets/' + options.id + '/edit';
-            asset.fetch({
-                success: function (asset) {
-                    var template = _.template($("#asset_new").html(), {asset: asset, list: '', add_new: '', type: 'assets'})
+            var assetModel = new App.Models.Asset();
+            assetModel.url = '/assets/' + options.id + '/edit';
+            assetModel.fetch({
+                success: function (fetchedAsset) {
+                    asset = fetchedAsset;
+                    var template = _.template($("#asset_new").html(), {asset: asset, list: '', add_new: '', type: 'assets'});
                     self.$el.html(template);
                 }
             });
         }
         else {
-            var template = _.template($("#asset_new").html(), {asset: null, list: '', add_new: 'active', type: 'assets'})
+            var template = _.template($("#asset_new").html(), {asset: asset, list: '', add_new: 'active', type: 'assets'});
             this.$el.html(template);
         }
-        assetEditView.applyDatepicker();
+
+        $.when(self.getAssetTypes()).then(
+            function (asset_types) {
+                $.each(asset_types, function (i, asset) {
+                    asset['id'] = asset['_id'];
+                });
+
+                self.applySelectBox(asset_types, asset);
+            }
+        );
+        self.applyDatepicker();
     },
 
     applyDatepicker: function () {
@@ -68,17 +68,34 @@ App.Views.Asset_edit = Backbone.View.extend({
         }, 500)
     },
 
-    applySelectBox: function (assetTypes) {
+    applySelectBox: function (assetTypes, asset) {
+        var self = this;
         $("#asset_warranty").select2();
         $("#asset_asset_type").select2({
             data: { results: assetTypes, text: 'name' },
             formatSelection: format,
             formatResult: format
-        });
+        }).on('change', function () {
+                var selectedValue = $(this).select2('data').name;
+                var selectedAssetProperties = self.getAssetTypeProperties(assetTypes, selectedValue);
+                self.appendFieldsForAssetProperties(selectedAssetProperties, asset);
+            });
         function format(item) {
             return item.name;
         }
+
+        if (asset) {
+            var selectedValue = $("#asset_asset_type").select2('data').name;
+            var selectedAssetProperties = self.getAssetTypeProperties(assetTypes, selectedValue);
+            self.appendFieldsForAssetProperties(selectedAssetProperties, asset);
+        }
     },
+
+
+    getAssetTypeProperties: function (assetTypes, selectedValue) {
+        return (_.findWhere(assetTypes, {name: selectedValue})).properties
+    },
+
 
     getAssetTypes: function () {
 
@@ -94,32 +111,59 @@ App.Views.Asset_edit = Backbone.View.extend({
         return deferred.promise();
     },
 
+
+    appendFieldsForAssetProperties: function (assetProperties, asset) {
+
+        $.each(assetProperties, function (key, property) {
+            var propertyValue = asset ? asset.get('properties')[property] : '';
+            appendingElement = '<div class="form-group">' +
+                '<label class="control-label col-md-2">' + property + '<sup>*</sup></label>' +
+                '<div class="col-md-6">' +
+                '<input type="text" class="form-control" name=' + property + ' id=asset_' + property + ' value=' + propertyValue + '>' +
+                '</div>' +
+                '<div id="asset_' + property + '_error" class="error">' + '</div>' +
+                '</div>';
+
+            $(".asset-properties").append(appendingElement)
+        })
+    },
+
+
     saveAsset: function (e) {
 
         e.preventDefault();
         var self = this;
-        var invoice_number = $("#asset_invoice_number").val();
-        var serial_number = $("#asset_serial_number").val();
-        var purchased_date = $("#asset_purchased_date").val();
-        var mac_address = $("#asset_mac_address").val();
-        var warranty = $("#asset_warranty").val();
-        var id = $("#asset_id").val();
-        var assetDetails = {invoice_number: invoice_number, serial_number: serial_number, purchased_date: purchased_date,
-            mac_address: mac_address, warranty: warranty, id: id};
         var asset = new App.Models.Asset;
         var assetRouter = new App.Routers.Asset;
-        var assetEditView = new App.Views.Asset_edit;
+        var assetDetails = self.serializeObject();
+        var asset_Type = $("#asset_asset_type").select2('data')
+        assetDetails["asset_type"] = asset_Type ? asset_Type.name : '';
 
         asset.on('error', function (model, errors) {
-            assetEditView.showErrors(errors);
+            self.showErrors(errors);
         });
 
         asset.save(assetDetails, {
             success: function () {
-                assetEditView.navigate(assetRouter);
+                self.navigate(assetRouter);
             }
         });
+    },
 
+    serializeObject: function () {
+        var o = {};
+        var a = $('.asset-form').serializeArray();
+        $.each(a, function () {
+            if (o[this.id]) {
+                if (!o[this.name].push) {
+                    o[this.name] = [o[this.name]];
+                }
+                o[this.name].push(this.value || '');
+            } else {
+                o[this.name] = this.value || '';
+            }
+        });
+        return o;
     },
 
     navigate: function (assetRouter) {

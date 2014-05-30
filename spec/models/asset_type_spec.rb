@@ -20,4 +20,14 @@ describe AssetType do
     end
   end
 
+  it 'should trim the white spacing from asset type properties' do
+
+    properties_with_white_speaces = ['       ram', 'harddisk      ', 'processor']
+    properties = ['ram', 'harddisk', 'processor']
+    asset_type = AssetType.new
+
+    expect(asset_type.trim_properties(properties_with_white_speaces)).to match_array(properties)
+
+  end
+
 end

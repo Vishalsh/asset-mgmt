@@ -14,20 +14,30 @@ describe AssetsController do
 
   describe 'POST #create' do
 
+    before(:each) do
+      @asset_type = FactoryGirl.create(:valid_asset_type)
+    end
+
     describe 'With valid attributes' do
 
       it 'should create a new asset type' do
-        expect { post :create, asset: FactoryGirl.attributes_for(:valid_asset), format: :json }.to change(Asset, :count).by(1)
+        expect { post :create, asset: FactoryGirl.attributes_for(:valid_asset), asset_type: 'laptop', format: :json }.to change(Asset, :count).by(1)
+      end
+
+      it 'should assign the asset type of the created asset' do
+        valid_asset = FactoryGirl.build(:valid_asset)
+        post :create, asset: valid_asset, asset_type: 'laptop', format: :json
+        expect(@asset_type) == (valid_asset.asset_type)
       end
 
       it 'renders the created asset as json' do
         valid_asset = FactoryGirl.build(:valid_asset)
-        post :create, asset: valid_asset, format: :json
+        post :create, asset: valid_asset, asset_type: 'laptop', format: :json
         response.body.should include (valid_asset.invoice_number)
       end
 
       it 'respond with a 201' do
-        post :create, asset: FactoryGirl.attributes_for(:valid_asset), format: :json
+        post :create, asset: FactoryGirl.attributes_for(:valid_asset), asset_type: 'laptop', format: :json
         response.status.should eq(201)
       end
 
@@ -36,16 +46,16 @@ describe AssetsController do
     describe 'with invalid attributes' do
 
       it 'should not create a new asset type' do
-        expect { post :create, asset: FactoryGirl.attributes_for(:invalid_asset), format: :json }.to change(Asset, :count).by(0)
+        expect { post :create, asset: FactoryGirl.attributes_for(:invalid_asset), asset_type: 'laptop', format: :json }.to change(Asset, :count).by(0)
       end
 
       it 'should render the errors as json' do
-        post :create, asset: FactoryGirl.attributes_for(:invalid_asset), format: :json
+        post :create, asset: FactoryGirl.attributes_for(:invalid_asset), asset_type: 'laptop', format: :json
         expect(response.body).to eq("{\"invoice_number\":[\"can't be blank\"]}")
       end
 
       it 'respond with a 422' do
-        post :create, asset: FactoryGirl.attributes_for(:invalid_asset), format: :json
+        post :create, asset: FactoryGirl.attributes_for(:invalid_asset), asset_type: 'laptop', format: :json
         response.status.should eq(422)
       end
 

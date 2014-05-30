@@ -10,6 +10,7 @@
 				<th>Purchased Date</th>
 				<th>Mac Address</th>
 				<th>Warranty</th>
+				<th>Asset type</th>
 				<th></th>
 				<th></th>
 			</tr>
@@ -22,6 +23,7 @@
 							<td><@= asset.get('purchased_date') @></td>
 							<td><@= asset.get('mac_address') @></td>
 							<td><@= asset.get('warranty') @></td>
+							<td><@= asset.get('asset_type_id').$oid @></td>
 							<td><a href="#assets/<@= asset.get('_id')['$oid'] @>/edit" class="glyphicon glyphicon-pencil"></a></td>
 							<td><a href="#assets/<@= asset.get('_id')['$oid'] @>" class="glyphicon glyphicon-trash" data-confirm="Are you sure?"></a></td>
 					</tr>

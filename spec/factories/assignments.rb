@@ -9,9 +9,9 @@ FactoryGirl.define do
   end
 
   factory :invalid_assignment, class: Assignment do |f|
-    f.start_date ''
+    f.start_date '20-05-2016'
     f.end_date '24-05-2014'
-    f.assigned_to 'vishalsh'
+    f.assigned_to ''
   end
 
 end

@@ -23,7 +23,7 @@ describe AssignmentsController do
       it 'renders the created assignment as json' do
         valid_assignment = FactoryGirl.build(:valid_assignment)
         post :create, assignment: valid_assignment, format: :json
-        response.body.should include (valid_assignment.start_date)
+        response.body.should include (valid_assignment.assigned_to)
       end
 
       it 'respond with a 201' do
@@ -41,7 +41,7 @@ describe AssignmentsController do
 
       it 'should render the errors as json' do
         post :create, assignment: FactoryGirl.attributes_for(:invalid_assignment), format: :json
-        expect(response.body).to eq("{\"start_date\":[\"can't be blank\"]}")
+        expect(response.body).to eq("{\"assigned_to\":[\"can't be blank\"]}")
       end
 
       it 'respond with a 422' do
@@ -66,7 +66,7 @@ describe AssignmentsController do
 
     it 'renders the assignment as json' do
       get :edit, id: @assignment.id, format: :json
-      response.body.should include (@assignment.start_date)
+      response.body.should include (@assignment.assigned_to)
     end
 
     it 'respond with a 200' do
@@ -82,17 +82,17 @@ describe AssignmentsController do
 
       before(:each) do
         @assignment = FactoryGirl.create(:valid_assignment)
-        @valid_assignment = FactoryGirl.attributes_for(:valid_assignment, start_date: '22-07-2014')
+        @valid_assignment = FactoryGirl.attributes_for(:valid_assignment, assigned_to: '22-07-2014')
       end
 
       it 'should update an existing asset type' do
         put :update, assignment: @valid_assignment, id: @assignment._id, format: :json
-        controller.instance_variable_get(:@assignment)[:start_date].should == @valid_assignment[:start_date]
+        controller.instance_variable_get(:@assignment)[:assigned_to].should == @valid_assignment[:assigned_to]
       end
 
       it 'renders the updated assignment as json' do
         put :update, assignment: @valid_assignment, id: @assignment._id, format: :json
-        response.body.should include (@valid_assignment[:start_date])
+        response.body.should include (@valid_assignment[:assigned_to])
       end
 
       it 'respond with a 200' do
@@ -106,17 +106,17 @@ describe AssignmentsController do
 
       before(:each) do
         @assignment = FactoryGirl.create(:valid_assignment)
-        @invalid_assignment = FactoryGirl.attributes_for(:valid_assignment, start_date: '')
+        @invalid_assignment = FactoryGirl.attributes_for(:valid_assignment, assigned_to: '')
       end
 
       it 'should not update an existing asset type' do
         put :update, assignment: @invalid_assignment, id: @assignment._id, format: :json
-        controller.instance_variable_get(:@assignment)[:start_date].should == @invalid_assignment[:start_date]
+        controller.instance_variable_get(:@assignment)[:assigned_to].should == @invalid_assignment[:assigned_to]
       end
 
       it 'should render the errors as json' do
         put :update, assignment: @invalid_assignment, id: @assignment._id, format: :json
-        expect(response.body).to eq("{\"start_date\":[\"can't be blank\"]}")
+        expect(response.body).to eq("{\"assigned_to\":[\"can't be blank\"]}")
       end
 
       it 'respond with a 422' do
@@ -140,7 +140,7 @@ describe AssignmentsController do
 
     it 'should render the deleted asset type' do
       delete :destroy, id: @assignment._id, format: :json
-      response.body.should include (@assignment[:start_date])
+      response.body.should include (@assignment[:assigned_to])
     end
 
     it 'respond with a 200' do

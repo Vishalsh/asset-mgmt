@@ -150,4 +150,23 @@ describe AssetsController do
 
   end
 
+  describe 'GET #serialnumber' do
+
+    before(:each) do
+      @asset = FactoryGirl.create(:valid_asset)
+    end
+
+    it 'should render the asset_type names' do
+      serial_numbers = [@asset.serial_number]
+      get :serial_numbers, format: :json
+      expect(response.body).to include (serial_numbers[0])
+    end
+
+    it 'respond with a 200' do
+      get :serial_numbers, format: :json
+      response.status.should eq(200)
+    end
+
+  end
+
 end

@@ -58,4 +58,12 @@ class AssetTypesController < ApplicationController
     end
   end
 
+  def names
+    names = AssetType.pluck(:name)
+    respond_to do |format|
+      format.json { render json: names, status: :ok }
+    end
+  end
+
+
 end

@@ -55,4 +55,11 @@ class AdminsController < ApplicationController
     end
   end
 
+  def names
+    names = Admin.pluck(:name)
+    respond_to do |format|
+      format.json { render json: names, status: :ok }
+    end
+  end
+
 end

@@ -61,4 +61,11 @@ class AssetsController < ApplicationController
     end
   end
 
+  def serial_numbers
+    serial_numbers = Asset.pluck(:serial_number)
+    respond_to do |format|
+      format.json { render json: serial_numbers, status: :ok }
+    end
+  end
+
 end

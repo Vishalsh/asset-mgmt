@@ -150,4 +150,23 @@ describe AdminsController do
 
   end
 
+  describe 'GET #names' do
+
+    before(:each) do
+      @admin = FactoryGirl.create(:valid_admin)
+    end
+
+    it 'should render the admin names' do
+      names = [@admin.name]
+      get :names, format: :json
+      expect(response.body).to include (names[0])
+    end
+
+    it 'respond with a 200' do
+      get :names, format: :json
+      response.status.should eq(200)
+    end
+
+  end
+
 end

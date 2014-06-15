@@ -7,6 +7,18 @@ App.Models.Admin = Backbone.Model.extend({
         name: ''
     },
 
+    getNames: function () {
+
+        var defer = $.Deferred();
+        this.url = '/admins/names';
+
+        $.get(this.url, function (names) {
+            defer.resolve(names)
+        });
+
+        return defer.promise();
+    },
+
     validate: function (attributes) {
 
         var errors = {};
@@ -19,7 +31,7 @@ App.Models.Admin = Backbone.Model.extend({
             errors.admin_name_error = 'Admin must have a name';
         }
 
-        if(!$.isEmptyObject(errors) ) {
+        if (!$.isEmptyObject(errors)) {
             return errors;
         }
     }

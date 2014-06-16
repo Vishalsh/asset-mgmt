@@ -150,4 +150,23 @@ describe AssetTypesController do
 
   end
 
+  describe 'GET #names' do
+
+    before(:each) do
+      @asset_type = FactoryGirl.create(:valid_asset_type)
+    end
+
+    it 'should render the asset_type names' do
+      names = [@asset_type.name]
+      get :names, format: :json
+      expect(response.body).to include (names[0])
+    end
+
+    it 'respond with a 200' do
+      get :names, format: :json
+      response.status.should eq(200)
+    end
+
+  end
+
 end

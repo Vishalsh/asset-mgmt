@@ -1,0 +1,83 @@
+<script type="text/template" id="assignment_new">
+
+	<%= render 'shared/navigation' %>
+
+<form class="assignment-form">
+
+	<div class='form-horizontal'>
+
+		<div class="form-group">
+			<label class="control-label col-md-2">Start date<sup>*</sup></label>
+			<div class="col-md-6">
+				<input type="text" name="start_date" id="assignment_start_date" class="form-control" data-date-format="dd-mm-yyyy" value="<@= assignment ? assignment.get('start_date') : '' @>" />
+			</div>
+			<div id="assignment_start_date_error" class="error"></div>
+		</div>
+
+		<div class="form-group">
+			<label class="control-label col-md-2">End date<sup>*</sup></label>
+			<div class="col-md-6">
+				<input type="text" name="end_date" id="assignment_end_date" class="form-control" data-date-format="dd-mm-yyyy" value="<@= assignment ? assignment.get('end_date') : '' @>" />
+			</div>
+			<div id="assignment_end_date_error" class="error"></div>
+		</div>
+
+		<div class="form-group">
+			<label class="control-label col-md-2">Assigned to<sup>*</sup></label>
+			<div class="col-md-6">
+				<input type="text" name="assigned_to" id="assignment_assigned_to" class="form-control" value="<@= assignment ? assignment.get('assigned_to') : '' @>" />
+			</div>
+			<div id="assignment_assigned_to_error" class="error"></div>
+		</div>
+
+		<div class="form-group">
+			<label class="control-label col-md-2">Assigned by<sup>*</sup></label>
+			<div class="col-md-6">
+				<select name="assigned_by" id="assignment_assigned_by" >
+				</select>
+			</div>
+			<div id="assignment_assigned_by_error" class="error"></div>
+		</div>
+
+		<div class="form-group">
+			<label class="control-label col-md-2">Asset type<sup>*</sup></label>
+			<div class="col-md-6">
+				<select name="asset_type" id="assignment_asset_type" >
+				</select>
+			</div>
+			<div id="assignment_asset_type_error" class="error"></div>
+		</div>
+
+		<div class="form-group">
+			<label class="control-label col-md-2">Asset<sup>*</sup></label>
+			<div class="col-md-6">
+				<select name="asset" id="assignment_asset" >
+				</select>
+			</div>
+			<div id="assignment_asset_error" class="error"></div>
+		</div>
+
+		<@ if (assignment) { @>
+			<input type="hidden" id="assignment_id" value="<@= assignment.get('_id')['$oid'] @>" />
+		<@ }; @>
+
+		<div class="form-group">
+			<div class="col-md-offset-2 col-md-4">
+				<button type="submit" class="btn btn-primary"><@= assignment ? 'Update' : 'Create' @></button>
+			</div>
+		</div>
+
+	</div>
+</form>
+
+
+
+
+
+
+
+
+
+
+
+</script>

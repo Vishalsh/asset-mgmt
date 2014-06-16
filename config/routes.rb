@@ -4,7 +4,10 @@ AssetMgmt::Application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'asset_types#index'
+
+  get '/admins/names', controller: 'admins#names'
+  get '/asset_types/names', controller: 'asset_types#names'
+  get '/assets/serial_numbers', controller: 'assets#serial_numbers'
 
   resources :asset_types
   resources :assets
@@ -12,6 +15,10 @@ AssetMgmt::Application.routes.draw do
   resources :companies
   resources :models
   resources :offices
+  resources :assignments
+
+  root 'asset_types#index'
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

@@ -8,6 +8,18 @@ App.Models.Asset_type = Backbone.Model.extend({
         properties: []
     },
 
+    getNames: function () {
+
+        var defer = $.Deferred();
+        this.url = '/asset_types/names';
+
+        $.get(this.url, function (names) {
+            defer.resolve(names)
+        });
+
+        return defer.promise();
+    },
+
     validate: function (attributes) {
 
         var errors = {};

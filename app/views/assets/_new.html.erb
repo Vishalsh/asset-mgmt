@@ -25,7 +25,7 @@
 			<div class="form-group">
 				<label class="control-label col-md-2">Purchased Date<sup>*</sup></label>
 				<div class="col-md-6">
-					<input type="text" name="purchased_date" id="asset_purchased_date" class="form-control" data-date-format="dd-mm-yyyy" value="<@= asset ? asset.get('purchased_date') : '' @>"/>
+					<input type="text" name="purchased_date" id="asset_purchased_date" class="form-control" data-date-format="dd-mm-yyyy" value="<@= asset ? asset.get('purchased_date') : '' @>" readonly/>
 				</div>
 				<div id="asset_purchased_date_error" class="error"></div>
 			</div>
@@ -41,7 +41,7 @@
 			<div class="form-group">
 				<label class="control-label col-md-2" >Asset Type<sup>*</sup></label>
 				<div class="col-md-6">
-					<input name="asset_type" id="asset_asset_type"  value="<@= asset ? asset.get('asset_type_id') : '' @>" />
+					<select name="asset_type" id="asset_asset_type"></select>
 				</div>
 				<div id="asset_asset_type_error" class="error"></div>
 			</div>
@@ -53,7 +53,7 @@
 				<div class="col-md-6">
 					<select name="warranty" id="asset_warranty" >
 						<option disabled selected value=""></option>
-						<option value="1 year" >1 year</option>
+						<option value="1 year" selected>1 year</option>
 						<option value="2 year">2 year</option>
 						<option value="3 year">3 year</option>
 					</select>

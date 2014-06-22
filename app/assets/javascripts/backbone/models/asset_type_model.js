@@ -20,7 +20,17 @@ App.Models.Asset_type = Backbone.Model.extend({
         return defer.promise();
     },
 
-    validate: function (attributes) {
+    getAssetTypes: function () {
+
+      var defer = $.Deferred();
+      $.get('/asset_types', function(asset_types) {
+        defer.resolve(asset_types);
+      });
+      return defer.promise();
+    },
+
+
+  validate: function (attributes) {
 
         var errors = {};
 
